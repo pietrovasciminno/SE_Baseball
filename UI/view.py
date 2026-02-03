@@ -29,15 +29,15 @@ class View:
         # Intestazione
         self.txt_titolo = ft.Text(value="Gestione Squadre di Baseball", size=30, weight=ft.FontWeight.BOLD)
 
-        # TODO
 
         # Riga 1
-        self.dd_anno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left)
+        self.dd_anno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left, on_change=self.controller.handler_squadre)
 
         row1 = ft.Row([ft.Container(self.txt_titolo, width=500),
                                ft.Container(None, width=0),
                                ft.Container(self.dd_anno, width=250)],
                       alignment=ft.MainAxisAlignment.CENTER)
+        self.dd_anno.options = [ft.dropdown.Option(str(y)) for y in self.controller.get_years()]
 
         # Riga 2
         self.txt_out_squadre = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
@@ -57,8 +57,6 @@ class View:
                                ft.Container(self.pulsante_percorso, width=250)],
                       alignment=ft.MainAxisAlignment.CENTER)
 
-        for i in range(0,200):
-            self.txt_out_squadre.controls.append(ft.Text(f"Squadra {i}"))
 
         self.txt_risultato = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=True)
 
